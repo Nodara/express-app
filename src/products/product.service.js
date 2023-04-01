@@ -1,6 +1,5 @@
 const { Op } = require('sequelize');
-const Product = require('../database/store.model');
-
+const Product = require('../database/product.model');
 
 const getProducts = async ({
   id,

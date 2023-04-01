@@ -1,5 +1,5 @@
 const { Sequelize } = require('sequelize');
-const Product = require('./store.model');
+const Product = require('./product.model');
 const User = require('./user.model');
 
 const sequelize = new Sequelize(
