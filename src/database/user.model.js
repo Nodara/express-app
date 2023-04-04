@@ -15,7 +15,15 @@ class User extends Model {
       deletedAt: {
         type: DataTypes.DATE,
         allowNull: true,
-      }
+      },
+      email: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+      password: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
     },
      {
       sequelize: connection,

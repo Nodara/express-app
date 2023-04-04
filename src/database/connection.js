@@ -2,14 +2,16 @@ const { Sequelize } = require('sequelize');
 const Product = require('./product.model');
 const User = require('./user.model');
 
+const { DB_NAME, DB_PASSWORD, DB_USERNAME, DB_HOST, DB_PORT } = process.env;
+
 const sequelize = new Sequelize(
-  'postgres',
-  'root',
-  'root',
+  DB_NAME,
+  DB_USERNAME,
+  DB_PASSWORD,
   {
-    host: 'localhost',
+    host: DB_HOST,
     dialect: 'postgres',
-    port: 5432,
+    port: Number(DB_PORT),
   }
 );
 
