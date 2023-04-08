@@ -1,6 +1,6 @@
 const bcrypt = require('bcrypt');
 const User = require('../database/user.model');
-
+const ApiError = require('../error/apiError');
 
 const createUser = async ({
   nickName,
@@ -8,6 +8,8 @@ const createUser = async ({
   email,
   password,
 }) => { 
+  throw new ApiError(505, 'dummy');
+
   const user = await User.findOne({
     where: {
       email,

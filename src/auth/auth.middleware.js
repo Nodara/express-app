@@ -1,4 +1,6 @@
+const { StatusCodes } = require('http-status-codes');
 const jwt = require('jsonwebtoken');
+const ApiError = require('../error/apiError');
 
 const checkToken = (req, res, next) => {
   try{ 
@@ -9,11 +11,8 @@ const checkToken = (req, res, next) => {
     jwt.verify(token, process.env.SECRET);
 
     return next();
-
   } catch(e) {
-    return res.json({
-      message: 'invalid token'
-    });
+    return next(new ApiError(StatusCodes.UNAUTHORIZED, 'unauthorized'));
   }
 };
 

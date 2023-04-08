@@ -1,6 +1,8 @@
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 const User = require('../database/user.model');
+const { StatusCodes } = require('http-status-codes');
+const ApiError = require('../error/apiError');
 
 const validateUserPassword = ({  userPassword, passwordPayload }) => bcrypt.compareSync(passwordPayload, userPassword, process.env.SALT_AMOUNT);
 
@@ -10,8 +12,8 @@ const login = async ({ email, password }) => {
       email,
     }
   });
-
-  if(!user) throw new Error('Not Found');
+  
+  if(!user) throw new ApiError(StatusCodes.NOT_FOUND);
 
   const isValidated = validateUserPassword({ passwordPayload: password, userPassword: user.password });
 
@@ -31,7 +33,7 @@ const login = async ({ email, password }) => {
     return token;
   }  
 
-  throw new Error('Incorrect Password');
+  throw new ApiError(StatusCodes.BAD_REQUEST, 'Email/Password is incorrect');
 };
 
 module.exports=  { login };
